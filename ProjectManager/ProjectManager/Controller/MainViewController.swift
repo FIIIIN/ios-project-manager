@@ -5,6 +5,7 @@
 // 
 
 import UIKit
+import RxSwift
 
 class MainViewController: UIViewController {
 
@@ -15,6 +16,7 @@ class MainViewController: UIViewController {
             self.reloadTableViewData()
         }
     }
+    private var disposeBag = DisposeBag()
 
     private let dataProvider = DataProvider()
 
@@ -80,15 +82,26 @@ class MainViewController: UIViewController {
 
 // MARK: - Observing Method
 
+    // 메서드 이름 바꿀 것
     private func observeDateProvider() {
-        self.dataProvider.updated = { [weak self] in
-            guard let self = self else {
-                return
-            }
+//        self.dataProvider.updated = { [weak self] in
+//            guard let self = self else {
+//                return
+//            }
+//
+//            self.todoList = self.dataProvider.updatedList()
+//        }
+//        self.dataProvider.reload()
 
-            self.todoList = self.dataProvider.updatedList()
-        }
-        self.dataProvider.reload()
+        self.dataProvider.todoListObservable
+            .subscribe(onNext: { [weak self] data in
+                guard let self = self else {
+                    return
+                }
+
+                self.todoList = data
+            })
+            .disposed(by: self.disposeBag)
     }
 
 // MARK: - Reload View
@@ -122,6 +135,7 @@ class MainViewController: UIViewController {
                 return
             }
             let task = TodoTasks.getTask(taskIndex)
+
             guard let todosAtCertainTask = self.todoList[task] else {
                 return
             }
@@ -454,15 +468,22 @@ extension MainViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let taskIndex = self.tableViews.firstIndex(of: tableView),
-              let todosAtCertainTask = self.todoList[TodoTasks.getTask(taskIndex)]
-        else {
+        guard let taskIndex = self.tableViews.firstIndex(of: tableView) else {
             return nil
         }
 
         let header = tableView.dequeueReusableHeaderFooterView(
             withClass: MainTableViewHeaderView.self
         )
+
+        guard let todosAtCertainTask = self.todoList[TodoTasks.getTask(taskIndex)] else {
+            header.configureContents(
+                todoCount: 0, withTitle: TodoTasks.getTask(taskIndex).rawValue
+            )
+
+            return header
+        }
+
         let todoCount = todosAtCertainTask.count
 
         header.configureContents(

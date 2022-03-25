@@ -6,29 +6,33 @@
 //
 
 import Foundation
+import RxSwift
 
 class DataProvider {
 
-    var updated: () -> Void = {}
-    private var updatedTodoList = [TodoTasks: [Todo]]() {
-        didSet {
-            updated()
-        }
-    }
+//    var updated: () -> Void = {}
+//    private var updatedTodoList = [TodoTasks: [Todo]]() {
+//        didSet {
+//            updated()
+//        }
+//    }
     private let todoList = TodoList()
+
+    var todoListObservable = PublishSubject<[TodoTasks: [Todo]]>()
 
     func reload() {
         todoList.fetch { [weak self] list in
             guard let self = self else {
                 return
             }
-            self.updatedTodoList = list
+//            self.updatedTodoList = list
+            self.todoListObservable.onNext(list)
         }
     }
 
-    func updatedList() -> [TodoTasks: [Todo]] {
-        self.updatedTodoList
-    }
+//    func updatedList() -> [TodoTasks: [Todo]] {
+//        self.updatedTodoList
+//    }
 
     func add(todo: Todo, at task: TodoTasks) {
         self.todoList.add(todo: todo, at: task)
