@@ -16,6 +16,7 @@
 		0D7A352927D05184007F26F6 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A352827D05184007F26F6 /* DataProvider.swift */; };
 		0D7A352B27D05A19007F26F6 /* TodoTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A352A27D05A19007F26F6 /* TodoTasks.swift */; };
 		0D7A352D27D075D5007F26F6 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7A352C27D075D5007F26F6 /* MainTableViewCell.swift */; };
+		0D7F7E0527ED8980006AAC1D /* EditViewControllerCommunicationEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7F7E0427ED8980006AAC1D /* EditViewControllerCommunicationEvent.swift */; };
 		0D8088CA27CF91AA00199897 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8088C927CF91AA00199897 /* Todo.swift */; };
 		0D8088CD27CF942600199897 /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8088CC27CF942600199897 /* TodoList.swift */; };
 		0D8088D427CFA0DB00199897 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8088D327CFA0DB00199897 /* Date+Extension.swift */; };
@@ -49,6 +50,7 @@
 		0D7A352827D05184007F26F6 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		0D7A352A27D05A19007F26F6 /* TodoTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTasks.swift; sourceTree = "<group>"; };
 		0D7A352C27D075D5007F26F6 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		0D7F7E0427ED8980006AAC1D /* EditViewControllerCommunicationEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewControllerCommunicationEvent.swift; sourceTree = "<group>"; };
 		0D8088C927CF91AA00199897 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		0D8088CC27CF942600199897 /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
 		0D8088D327CFA0DB00199897 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				C7431F0925F51E1D0094C4CF /* MainViewController.swift */,
 				0D36ADF827D0F68E00A93720 /* EditViewController.swift */,
 				0D1F48A027E06E06006C60B0 /* ViewConfigureError.swift */,
+				0D7F7E0427ED8980006AAC1D /* EditViewControllerCommunicationEvent.swift */,
 				0DC8637227DA5A9E001E5DD8 /* EditControllerProtocol */,
 			);
 			path = Controller;
@@ -386,6 +389,7 @@
 				C7431F0A25F51E1D0094C4CF /* MainViewController.swift in Sources */,
 				0DC8637627DA692E001E5DD8 /* EditView.swift in Sources */,
 				0D7A352927D05184007F26F6 /* DataProvider.swift in Sources */,
+				0D7F7E0527ED8980006AAC1D /* EditViewControllerCommunicationEvent.swift in Sources */,
 				C7431F0625F51E1D0094C4CF /* AppDelegate.swift in Sources */,
 				0D7A352B27D05A19007F26F6 /* TodoTasks.swift in Sources */,
 				0DF22DEF27D2122200CE0BD5 /* EditEventAvailable.swift in Sources */,

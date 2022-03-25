@@ -150,7 +150,6 @@ class MainViewController: UIViewController {
     }
 
     private func presentNavigationController() {
-        self.editViewController.dataProvider = self.dataProvider
         let navigationController = UINavigationController(
             rootViewController: self.editViewController
         )
@@ -506,9 +505,18 @@ extension MainViewController: EditEventAvailable {
         editViewController.dismiss(animated: true, completion: nil)
     }
 
-    func editViewControllerDidFinish(_ editViewController: EditViewController) {
-        self.reloadTableViewData()
+    func editViewControllerDidFinish(
+        _ editViewController: EditViewController,
+        withEvent event: EditViewControllerCommunicationEvent
+    ) {
+        switch event {
+        case .add(let todo, let task):
+            self.dataProvider.add(todo: todo, at: task)
+        case .update(let newTodo, let task, let originalTodo):
+            self.dataProvider.update(todo: newTodo, at: task, originalTodo: originalTodo)
+        }
 
+        self.reloadTableViewData()
         editViewController.dismiss(animated: true, completion: nil)
     }
 }

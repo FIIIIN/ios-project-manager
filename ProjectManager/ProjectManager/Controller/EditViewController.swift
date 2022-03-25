@@ -13,7 +13,6 @@ class EditViewController: UIViewController, UIAdaptivePresentationControllerDele
 
     private var todo: Todo?
     private var beingEditedTodoTask: TodoTasks?
-    weak var dataProvider: DataProvider?
     weak var mainViewDelegate: EditEventAvailable?
 
 // MARK: - View Components
@@ -148,10 +147,18 @@ class EditViewController: UIViewController, UIAdaptivePresentationControllerDele
             self.editView.textView.text = EditControllerScript.emptyText
         }
 
-        let todo = self.convertToTodo()
-
-        self.branchWithOrWithoutDefaultValue(newTodo: todo)
-        self.mainViewDelegate?.editViewControllerDidFinish(self)
+        let newTodo = self.convertToTodo()
+        if let task = self.beingEditedTodoTask,
+           let originalTodo = self.todo {
+            self.mainViewDelegate?.editViewControllerDidFinish(
+                self, withEvent: .update(newTodo: newTodo, task: task, originalTodo: originalTodo)
+            )
+            self.todo = nil
+        } else {
+            self.mainViewDelegate?.editViewControllerDidFinish(
+                self, withEvent: .add(todo: newTodo, task: .todo)
+            )
+        }
     }
 
     @objc
@@ -182,16 +189,6 @@ class EditViewController: UIViewController, UIAdaptivePresentationControllerDele
         )
 
         return todo
-    }
-
-    private func branchWithOrWithoutDefaultValue(newTodo: Todo) {
-        if let task = self.beingEditedTodoTask,
-           let originalTodo = self.todo {
-            self.dataProvider?.update(todo: newTodo, at: task, originalTodo: originalTodo)
-            self.todo = nil
-        } else {
-            self.dataProvider?.add(todo: newTodo, at: .todo)
-        }
     }
 }
 
