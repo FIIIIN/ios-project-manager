@@ -25,14 +25,10 @@ class DataProvider {
             guard let self = self else {
                 return
             }
-//            self.updatedTodoList = list
+
             self.todoListObservable.onNext(list)
         }
     }
-
-//    func updatedList() -> [TodoTasks: [Todo]] {
-//        self.updatedTodoList
-//    }
 
     func add(todo: Todo, at task: TodoTasks) {
         self.todoList.add(todo: todo, at: task)
